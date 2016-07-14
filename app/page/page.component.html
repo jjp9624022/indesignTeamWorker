@@ -1,0 +1,17 @@
+<div *ngIf="page">
+  <h2>{{page.name}} details!</h2>
+  <div>
+    <label>id: </label>{{page.id}}</div>
+  <div>
+    <label>name: </label>
+    <input [(ngModel)]="page.name" placeholder="name" />
+   </div>
+   <div class=page width={{page.getWidth}} height={{page.getWidth}} background-image={{page.pageImg}}>
+   <div *ngFor="let para of page.paras" class=paragrah>
+   <para>
+   	
+   </para>
+   </div>
+  <button (click)="goBack()">上页</button>
+  <button (click)="goPriew()">下页</button>
+</div>
