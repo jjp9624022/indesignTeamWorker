@@ -37,8 +37,8 @@ jspm_packages
 .node_repl_history
 
 
-app/*.map
-app/*.js
+/app/*/.map
+/app/*/.js
 .pyc
 
 .swp
@@ -52,3 +52,6 @@ typings/*
 .DS_Store
 
 desktop.ini
+
+dist
+
