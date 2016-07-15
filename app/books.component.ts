@@ -59,7 +59,7 @@ export class BooksComponent implements OnInit {
   }
 
   gotoDetail() {
-    this.router.navigate(['/detail', this.selectedBook.id]);
+    this.router.navigate(['/editor', this.selectedBook.id]);
   }
 }
 

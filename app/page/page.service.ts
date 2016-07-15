@@ -22,7 +22,7 @@ export class PageService {
 
   }
   setBookId(bookId:number){
-   return this.pagesUrl='api/books/'+bookId+'pages';
+   return this.pagesUrl='api/books/'+bookId+"/pages";
   }
   // getPage(id: number) {
   //   return this.getPages()

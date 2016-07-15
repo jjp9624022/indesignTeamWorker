@@ -16,10 +16,13 @@ class Book:
 		my_idml_package = idml.IDMLPackage("./test.idml")
 		self.stories=my_idml_package.get_story_object_by_xpath("*")
 		self.idml=my_idml_package
+		pageIdList=self.stories.node.xpath("//Story/XMLElement[@MarkupTag='XMLTag/story']//XMLElement[@MarkupTag='XMLTag/paragraph']/XMLAttribute[@Name='page']/@Value")
+		self.pagesId = sorted(set(pageIdList),key=pageIdList.index)
 		self.bookName=""
 		self.pageNumber=""
 		self.editors=""
 		self.id=id
+
 
 		#print etree.tostring(self.stories.node, pretty_print=True,encoding='UTF-8')
 class Page:
@@ -29,8 +32,8 @@ class Page:
 	def __init__(self,id,in_book):
 		self.xmlParas=in_book.stories.node.xpath("//Story/XMLElement[@MarkupTag='XMLTag/story']//XMLElement[@MarkupTag='XMLTag/paragraph' and child::XMLAttribute[@Name='page' and @Value='%s']]"%id)
 		self.id=id
-		self.number=""
-		self.pageImg=""
+		self.name="test"
+		self.pageImg="test.jpg"
 		self.book=""
 		self.paras=[xmlPara.xpath("./XMLAttribute[@Name='id']/@Value")[0] for xmlPara in self.xmlParas]
 		

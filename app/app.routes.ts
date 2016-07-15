@@ -3,6 +3,7 @@ import { provideRouter, RouterConfig }  from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { BooksComponent } from './books.component';
 import { BookDetailComponent } from './book-detail.component';
+import { PageEditorComponent } from './page/page-editor.component';
 
 export const routes: RouterConfig = [
   {
@@ -18,6 +19,14 @@ export const routes: RouterConfig = [
     path: 'detail/:id',
     component: BookDetailComponent
   },
+  {
+    path: 'editor/:id',
+    component: PageEditorComponent
+  },
+  //  {
+  //   path: 'books/:id/pages/:pageId',
+  //   component: PageEditorComponent
+  // }, 
   {
     path: 'books',
     component: BooksComponent

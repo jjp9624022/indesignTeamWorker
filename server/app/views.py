@@ -21,6 +21,14 @@ class PageView(Resource):
         page=Page(page_id,book)
         return PageSerializer(page).data
 
+class PageListView(Resource):
+    def get(self,book_id):
+        book=Book(book_id)
+        pages=[ PageSerializer(Page(pageId,book)).data for pageId in book.pagesId]
+        # return PageSerializer(pages).data
+        return jsonify(data=pages)
+
+
 class ParaView(Resource):
     def get(self,book_id,page_id,para_id):
         book=Book(book_id)
@@ -31,7 +39,7 @@ class BookListView(Resource):
     def get(self):
         heroes=[
             {'id':11,'name':'Mr. Nice'},
-            {'id':12,'name':u'齐天大圣'},
+            {'id':231,'name':u'齐天大圣'},
             {'id':13,'name':'Bombasto'},
             {'id':14,'name':'Celeritas'},
             {'id':15,'name':'Magneta'},
@@ -43,9 +51,10 @@ class BookListView(Resource):
         ]
         # return Response(json.dumps(heroes),  mimetype='application/json')
         return jsonify(data=heroes)
-api.add_resource(PageView, '/api/<string:book_id>/<string:page_id>')
+api.add_resource(PageView, '/api/books/<string:book_id>/pages/<string:page_id>')
 api.add_resource(ParaView, '/api/<string:book_id>/<string:page_id>/<string:para_id>')
 api.add_resource(BookListView, '/api/books')
+api.add_resource(PageListView, '/api/books/<string:book_id>/pages')
 
 
 if __name__ == '__main__':
