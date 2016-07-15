@@ -1,6 +1,6 @@
 export class Page {
-  id: number;
+  id: string;
   name: string;
-  paras:number[];
+  paras:string[];
   pageImg:string;
 }

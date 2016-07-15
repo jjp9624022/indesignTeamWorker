@@ -8,7 +8,7 @@ import { Page } from './page';
 @Injectable()
 export class PageService {
 
-  private pagesUrl = 'api/pages';  // URL to web api
+  private pagesUrl = '';  // URL to web api
   
 
   constructor(private http: Http) { }
@@ -21,18 +21,17 @@ export class PageService {
                .catch(this.handleError);
 
   }
-
+  setBookId(bookId:number){
+   return this.pagesUrl='api/books/'+bookId+'pages';
+  }
   // getPage(id: number) {
   //   return this.getPages()
   //              .then(pages => pages.filter(page => page.id === id)[0]);
   // }
-  getPage(id: number): Promise<Page> {
-    // console.error(this.http.get(this.pagesUrl).toPromise().then())
-    return this.http.get(this.pagesUrl+id)
-               .toPromise()
-               .then(response => response.json().data)//这里坑太大，data属性只用于他们的in mamory server
-               .catch(this.handleError);
-             }
+getPage(id: string) {
+    return this.getPages()
+               .then(pages => pages.filter(page => page.id === id)[0]);
+  }
 
 
   save(page: Page): Promise<Page>  {

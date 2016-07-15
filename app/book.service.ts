@@ -16,7 +16,7 @@ export class BookService {
     // console.error(this.http.get(this.booksUrl).toPromise().then())
     return this.http.get(this.booksUrl)
                .toPromise()
-               .then(response => response.json())//这里坑太大，data属性只用于他们的in mamory server
+               .then(response => response.json().data)//这里坑太大，data,后来发现，居然也支持自己设置个data的属性名称。属性只用于他们的in mamory server
                .catch(this.handleError);
 
   }
