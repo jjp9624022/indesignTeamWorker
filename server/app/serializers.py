@@ -2,7 +2,7 @@ from marshmallow import Serializer, fields
 
 class PageSerializer(Serializer):
     class Meta:
-        fields = ("id","name","pageImg","paras")
+        fields = ("id","name","pageImg","paras","bounds")
          
 class UserSerializer(Serializer):
     class Meta:
