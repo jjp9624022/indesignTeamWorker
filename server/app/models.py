@@ -34,7 +34,7 @@ class Page:
 		self.id=id
 		self.name="test"
 		self.pageImg="test.jpg"
-		self.book=""
+		self.bounds=""
 		self.paras=[xmlPara.xpath("./XMLAttribute[@Name='id']/@Value")[0] for xmlPara in self.xmlParas]
 		
 
