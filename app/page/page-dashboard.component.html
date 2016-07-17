@@ -1,0 +1,8 @@
+  <div *ngFor="let page of pages"  class="col-1-4">
+  <div><label>id: </label>{{page.id}}</div>
+  <div><label>name:</label>{{page.name}}</div>
+  <div *ngFor="let para of page.paras">
+  	  <div><label>id: </label>{{para}}</div>
+
+  </div>
+  </div>
