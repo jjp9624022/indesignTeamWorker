@@ -3,7 +3,8 @@ import { provideRouter, RouterConfig }  from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { BooksComponent } from './books.component';
 import { BookDetailComponent } from './book-detail.component';
-import { PageEditorComponent } from './page/page-editor.component';
+import {PageDashboardComponent} from './page/page-dashboard.component'
+// import { PageEditorComponent } from './page/page-editor.component';
 
 export const routes: RouterConfig = [
   {
@@ -19,14 +20,14 @@ export const routes: RouterConfig = [
     path: 'detail/:id',
     component: BookDetailComponent
   },
-  {
-    path: 'editor/:id',
-    component: PageEditorComponent
-  },
-  //  {
-  //   path: 'books/:id/pages/:pageId',
+  // {
+  //   path: 'editor/:id',
   //   component: PageEditorComponent
-  // }, 
+  // },
+   {
+    path: 'books/:bookId/pageDashboard',
+    component: PageDashboardComponent
+  }, 
   {
     path: 'books',
     component: BooksComponent

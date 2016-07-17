@@ -1,7 +1,7 @@
 from flask import g
 from simple_idml import idml
 from lxml import etree
-import xmltodict
+# import xmltodict
 # use sample json is ok and not XML.
 class Book:
 	# stories

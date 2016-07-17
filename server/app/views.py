@@ -7,7 +7,7 @@ from flask_restful import Resource, Api
 from serializers import PageSerializer, ParaSerializer
 from lxml import etree
 from models import Book, Page,Paragraph
-import xmltodict
+# import xmltodict
 #flask app setup,and restfull
 app = Flask(__name__)
 # if __name__ == '__main__':
