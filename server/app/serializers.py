@@ -9,15 +9,15 @@ class UserSerializer(Serializer):
         fields = ("id", "title","img", "body", "user","tag", "created_at")
 
 class ChangeSerializer(Serializer):
-    user = fields.Nested(UserSerializer)
+    user = fields.Nested(UserSerializer,many=True)
     class Meta:
 	    fields = ("bounds","contents","user","date")
 
 class ParaSerializer(Serializer):
-    change = fields.Nested(ChangeSerializer)
+    changes = fields.Nested(ChangeSerializer,many=True)
 
     class Meta:
-        fields=("id","bounds","contents","change")
+        fields=("id","bounds","contents","changes")
 
 class NoteSerializer(Serializer):
     class Meta:

@@ -8,7 +8,8 @@ import { Page } from './page';
 @Injectable()
 export class PageService {
 
-  private pagesUrl = '';  // URL to web api
+  private pagesUrl = ''; 
+  private bookId:number; // URL to web api
   
 
   constructor(private http: Http) { }
@@ -22,7 +23,12 @@ export class PageService {
 
   }
   setBookId(bookId:number){
+    this.bookId=bookId;
    return this.pagesUrl='api/books/'+bookId+"/pages";
+  }
+
+  getBookId(){
+    return this.bookId;//试试单例模式
   }
   // getPage(id: number) {
   //   return this.getPages()

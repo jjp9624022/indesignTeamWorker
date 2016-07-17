@@ -1,4 +1,4 @@
-  <div *ngFor="let page of pages"  class="col-1-4">
+  <div *ngFor="let page of pages"  class="col-1-4" (click)="onSelect(page)" >
   <div><label>id: </label>{{page.id}}</div>
   <div><label>name:</label>{{page.name}}</div>
   <div *ngFor="let para of page.paras">
@@ -6,3 +6,4 @@
 
   </div>
   </div>
+  <my-page-detail *ngIf="selectedPage" [page]="selectedPage"></my-page-detail>

@@ -35,6 +35,14 @@ class ParaView(Resource):
         page=Page(page_id,book)
         para=Paragraph(id=para_id,in_page=page,in_book=book)
         return ParaSerializer(para).data
+
+class ParaListView(Resource):
+    def get(self,book_id,page_id):
+        book=Book(book_id)
+        page=Page(page_id,book)
+        paras=[ParaSerializer(Paragraph(id=paraId,in_page=page,in_book=book)).data for paraId in page.paras]
+        return jsonify(data=paras)
+
 class BookListView(Resource):
     def get(self):
         heroes=[
@@ -52,9 +60,10 @@ class BookListView(Resource):
         # return Response(json.dumps(heroes),  mimetype='application/json')
         return jsonify(data=heroes)
 api.add_resource(PageView, '/api/books/<string:book_id>/pages/<string:page_id>')
-api.add_resource(ParaView, '/api/<string:book_id>/<string:page_id>/<string:para_id>')
+api.add_resource(ParaView, '/api/books/<string:book_id>/pages/<string:page_id>/paras<string:para_id>')
 api.add_resource(BookListView, '/api/books')
 api.add_resource(PageListView, '/api/books/<string:book_id>/pages')
+api.add_resource(ParaListView, '/api/books/<string:book_id>/pages/<string:page_id>/paras')
 
 
 if __name__ == '__main__':

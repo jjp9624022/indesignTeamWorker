@@ -10,13 +10,27 @@ export class ParaService {
 
   private parasUrl = 'api';  // URL to web api
 
-  
+  private bookId:number;
+
+  private pageId:string;
 
   constructor(private http: Http) { }
+  
+
+  setBookId(id:number){
+    this.bookId=id;
+    return this;
+
+  }
+
+setPageId(id:string){
+  this.pageId=id;
+  return this
+}
 
   getParas(): Promise<Para[]> {
     // console.error(this.http.get(this.parasUrl).toPromise().then())
-    return this.http.get(this.parasUrl)
+    return this.http.get(this.parasUrl+'/books/'+this.bookId+'/pages/'+this.pageId+'/paras')
                .toPromise()
                .then(response => response.json().data)//这里坑太大，data属性只用于他们的in mamory server
                .catch(this.handleError);

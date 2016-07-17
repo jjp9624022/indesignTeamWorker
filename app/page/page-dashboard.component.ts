@@ -4,11 +4,14 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Page }        from './page';
 import { PageService } from './page.service';
+import {PageDetailComponent} from './page-detail.component'
 
 @Component({
   selector: 'my-page-dashboard',
   templateUrl: 'app/page/page-dashboard.component.html',
   styleUrls: ['app/page/page-dashboard.component.css'],
+    directives: [PageDetailComponent],
+
   providers: [
     PageService,
   ]
@@ -17,6 +20,7 @@ import { PageService } from './page.service';
 export class PageDashboardComponent implements OnInit {
 
   pages: Page[] = [];
+  selectedPage:Page;
   sub:any;
 
   constructor(
@@ -40,7 +44,10 @@ export class PageDashboardComponent implements OnInit {
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
-  gotoDetail(page: Page) {
+  onSelect(page: Page) {
+        this.selectedPage = page;
+        console.info(page);
+
   }
 }
 

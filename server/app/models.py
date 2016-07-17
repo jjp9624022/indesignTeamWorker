@@ -47,7 +47,7 @@ class Paragraph:
 		self.xml=in_page.getParagraph(id)
 		self.bounds=self.xml.xpath("./XMLAttribute[@Name='bounds']/@Value")[0].split(",")
 		self.contents=self.xml.xpath("./Content/text()")
-		self.changes=""
+		self.changes=[]
 		self.notes=""
 		self.id=id
 		
