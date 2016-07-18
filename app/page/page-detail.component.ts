@@ -4,6 +4,7 @@ import { Page }        from './page';
 import { Para }        from '../para/para';
 import { ParaService } from '../para/para.service';
 import { PageService } from './page.service';
+import {ParaEditorComponent} from '../para/para-editor.component'
 
 @Component({
   selector: 'my-page-detail',
@@ -11,7 +12,8 @@ import { PageService } from './page.service';
   styleUrls: ['app/page/page-detail.component.css'],
   providers: [
     ParaService,//这里不放pageservice，di向上查找pageservice。
-  ]
+  ],
+  directives:[ParaEditorComponent],
 
 })
 export class PageDetailComponent implements OnInit,OnChanges {
