@@ -22,8 +22,7 @@
     'rxjs':                       'https://npmcdn.com/rxjs@5.0.0-beta.6',
     'ts':                         'https://npmcdn.com/plugin-typescript@4.0.10/lib/plugin.js',
     'typescript':                 'https://npmcdn.com/typescript@1.9.0-dev.20160409/lib/typescript.js',
-    'primeng':                    'node_modules/primeng',
-    'quill':                      'node_modules/quill/dest',
+    'quill':                      'node_modules/quill',
     
  };
 
@@ -32,8 +31,8 @@
     'app':                        { main: 'main.ts',  defaultExtension: 'ts' },
     'rxjs':                       { defaultExtension: 'js' },
     'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
-    'primeng':                    { defaultExtension: 'js' },
-    'quill':                    { defaultExtension: 'js',main: 'quill.js' },
+    'quill':                      { main: 'index.js', defaultExtension: 'js' },     
+
   };
 
   var ngPackageNames = [
