@@ -33,8 +33,8 @@ class Page:
 		self.xmlParas=in_book.stories.node.xpath("//Story/XMLElement[@MarkupTag='XMLTag/story']//XMLElement[@MarkupTag='XMLTag/paragraph' and child::XMLAttribute[@Name='page' and @Value='%s']]"%id)
 		self.id=id
 		self.name="test"
-		self.pageImg="test.jpg"
-		self.bounds=""
+		self.pageImg="app/test.jpg"
+		self.bounds=[0,0,210,285]
 		self.paras=[xmlPara.xpath("./XMLAttribute[@Name='id']/@Value")[0] for xmlPara in self.xmlParas]
 		
 

@@ -1,10 +1,11 @@
-
-  <div *ngFor="let page of pages"  class="col-1-4" (click)="onSelect(page)" >
+ <my-my-book-detail width="25%"></my-my-book-detail>
+ <my-page-detail *ngIf="selectedPage" [page]="selectedPage"  width="50%"></my-page-detail>
+  <div *ngFor="let page of pages"  class="col-1-4" (click)="onSelect(page)" width="25%">
   <div><label>id: </label>{{page.id}}</div>
   <div><label>name:</label>{{page.name}}</div>
-  <div *ngFor="let para of page.paras">
+ <!--  <div *ngFor="let para of page.paras">
   	  <div><label>id: </label>{{para}}</div>
 
+  </div> -->
   </div>
-  </div>
-  <my-page-detail *ngIf="selectedPage" [page]="selectedPage"></my-page-detail>
+ 

@@ -3,4 +3,5 @@ export class Page {
   name: string;
   paras:string[];
   pageImg:string;
+  bounds:number[];
 }
