@@ -37,15 +37,22 @@ paras: Para[] = [];
     private paraService: ParaService) {
   }
   ngOnInit() {
+// var toolbarOptions = [
+//   [{ size: ['small', false, 'large', 'huge'] }],
+//   ['bold', 'italic', 'underline'],
+//   [{ color: [] }, { background: [] }],    // Snow theme fills in values
+//   [{ script: 'sub' }, { script: 'super' }]
+// ];
   this.editor = new Quill('#editor', {
   modules: {
-    // 'authorship': { authorId: 'galadriel', enabled: true },
-    // 'multi-cursor': true,
-    'toolbar': { container: '#full-toolbar' },
-    // 'link-tooltip': true
+    'authorship': { authorId: 'galadriel', enabled: true },
+    'multi-cursor': true,
+    'link-tooltip': true
   },
   theme: 'snow'
 }); 
+  this.editor.addModule('toolbar', { container: '#toolbar' });
+  this.editor.on('text-change', delta=>console.info(delta));
 }
 
 doEditor(paras:any){
@@ -56,11 +63,13 @@ doEditor(paras:any){
 
 
     }
-        console.info(text);
+        
 
-
+let authManager=this.editor.getModule("authorship");
+console.info(authManager);
+authManager.addAuthor('id-5678', 'rgb(255, 255, 0)');
     this.editor.setContents(text);
-/*    this.editor.addModule('toolbar', { container: '#toolbar' });
+/*    
     var module = this.editor.addModule('authorship', {
   authorId: 'id-1234',
   button: '#author-button',
@@ -70,12 +79,12 @@ doEditor(paras:any){
 module.addAuthor('id-5678', 'rgb(255, 255, 0)'); */
 // Set external authors
 
-/*this.editor.on('text-update', function(delta) {
-  // If the user types an 'a' into the editor, normally we would get:
-  //   delta.ops = [{ 'a' }]
-  // But with the author module enabled we would now get:
-  //   delta.ops = [{ value: 'a', attributes: { author: 'id-1234' } }]
-});*/
+// this.editor.on('text-update', function(delta) {
+//   // If the user types an 'a' into the editor, normally we would get:
+//   //   delta.ops = [{ 'a' }]
+//   // But with the author module enabled we would now get:
+//   //   delta.ops = [{ value: 'a', attributes: { author: 'id-1234' } }]
+// });
 
     
           

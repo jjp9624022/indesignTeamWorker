@@ -13,6 +13,7 @@
   //map tells the System loader where to look for things
   var  map = {
     'app':                        'app',
+   // '@angular':                   'https://npmcdn.com/@angular', // sufficient if we didn't pin the version
 
     '@angular':                   'https://npmcdn.com/@angular', // sufficient if we didn't pin the version
     '@angular/router':            'https://npmcdn.com/@angular/router' + routerVer,
@@ -23,7 +24,7 @@
     'ts':                         'https://npmcdn.com/plugin-typescript@4.0.10/lib/plugin.js',
     'typescript':                 'https://npmcdn.com/typescript@1.9.0-dev.20160409/lib/typescript.js',
     'quill':                      'node_modules/quill',
-    'eventemitter2':              'node_modules/eventemitter2',
+    'eventemitter':               'node_modules/eventemitter2',
     
  };
 
@@ -32,8 +33,9 @@
     'app':                        { main: 'main.ts',  defaultExtension: 'ts' },
     'rxjs':                       { defaultExtension: 'js' },
     'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
-    'quill':                      { main: 'index.js', defaultExtension: 'js' }, 
-    'eventemitter2':              { main: 'index.js', defaultExtension: 'js' },     
+    'eventemitter':               { main: 'index.js', defaultExtension: 'js' }, 
+    'quill':                      { main: 'index.js', defaultExtension: 'js' },     
+    
     
 
   };
