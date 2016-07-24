@@ -1,16 +1,16 @@
 <!-- <div *ngFor="let para of paras"  class="para">
 <div><my-para-editor [contents]="para.contents"></my-para-editor></div>
 </div> -->
-<link rel="stylesheet" href="//cdn.quilljs.com/0.20.1/quill.snow.css" />
+<link href="https://cdn.quilljs.com/1.0.0-beta.9/quill.snow.css" rel="stylesheet">
 <div class="pageContent" [ngStyle]="{'width':page.bounds[2]*3+'px','height':page.bounds[3]*3+'px','background-image': 'url(' + page.pageImg + ')'}">
 <div id="toolbar">
-<select class="ql-size">
+<!-- <select class="ql-size">
     <option value="10px">Small</option>
     <option value="13px" selected>Normal</option>
     <option value="18px">Large</option>
     <option value="32px">Huge</option>
-  </select>
-    <button class="ql-bold"></button>
+  </select> -->
+    <!-- <button class="ql-bold"></button> -->
 
 </div>
 <div id="editor" >

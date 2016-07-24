@@ -23,8 +23,9 @@
     'rxjs':                       'https://npmcdn.com/rxjs@5.0.0-beta.6',
     'ts':                         'https://npmcdn.com/plugin-typescript@4.0.10/lib/plugin.js',
     'typescript':                 'https://npmcdn.com/typescript@1.9.0-dev.20160409/lib/typescript.js',
-    'quill':                      'node_modules/quill',
-    'eventemitter':               'node_modules/eventemitter2',
+    'quill':                      'node_modules/quill/dist/quill.js',
+    'eventemitter':               'node_modules/eventemitter3',
+    'rich-text':                      'node_modules/rich-text',
     
  };
 
@@ -33,8 +34,10 @@
     'app':                        { main: 'main.ts',  defaultExtension: 'ts' },
     'rxjs':                       { defaultExtension: 'js' },
     'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
-    'eventemitter':               { main: 'index.js', defaultExtension: 'js' }, 
-    'quill':                      { main: 'index.js', defaultExtension: 'js' },     
+    'eventemitter':               { main: 'index.js', defaultExtension: 'js' },
+    'rich-text':               { main: 'index.js', defaultExtension: 'js' }, 
+ 
+   // 'quill':                      { main: 'main.js'},     
     
     
 

@@ -6,8 +6,13 @@ import { Para }        from '../para/para';
 import { ParaService } from '../para/para.service';
 import { PageService } from './page.service';
 import {ParaEditorComponent} from '../para/para-editor.component'
-export var Quill = require("quill");//这句太关键，但是有点丑陋，其实就是从这一句我发现了ts的配置诀窍。
+// import "quill";
+export var Quill = require("quill");
+
+//这句太关键，但是有点丑陋，其实就是从这一句我发现了ts的配置诀窍。
 // export var EventEmitter2=require("eventemitter2");
+import {Authorship} from './authorship';
+
         
 @Component({
   selector: 'my-page-detail',
@@ -37,21 +42,26 @@ paras: Para[] = [];
     private paraService: ParaService) {
   }
   ngOnInit() {
-// var toolbarOptions = [
-//   [{ size: ['small', false, 'large', 'huge'] }],
-//   ['bold', 'italic', 'underline'],
-//   [{ color: [] }, { background: [] }],    // Snow theme fills in values
-//   [{ script: 'sub' }, { script: 'super' }]
-// ];
+
+Quill.register({'modules/authorship':Authorship});
+var toolbarOptions = [
+  [{ size: ['small', false, 'large', 'huge'] }],
+  ['bold', 'italic', 'underline'],
+  [{ color: [] }, { background: [] }],    // Snow theme fills in values
+  [{ script: 'sub' }, { script: 'super' }]
+];
   this.editor = new Quill('#editor', {
   modules: {
+    'toolbar':toolbarOptions,
     'authorship': { authorId: 'galadriel', enabled: true },
-    'multi-cursor': true,
-    'link-tooltip': true
+    // 'multi-cursor': true,
+    // 'link-tooltip': true
   },
   theme: 'snow'
 }); 
-  this.editor.addModule('toolbar', { container: '#toolbar' });
+
+  
+  // this.editor.addModule('toolbar', { container: '#toolbar' });
   this.editor.on('text-change', delta=>console.info(delta));
 }
 
