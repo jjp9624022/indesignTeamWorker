@@ -62,7 +62,7 @@ var toolbarOptions = [
 
   
   // this.editor.addModule('toolbar', { container: '#toolbar' });
-  this.editor.on('text-change', delta=>console.info(delta));
+  this.editor.on('text-change', delta=>console.info("total",this.editor.getContents()));
 }
 
 doEditor(paras:any){

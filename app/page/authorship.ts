@@ -1,6 +1,6 @@
 /// <reference path="./module.d.ts" />
 
-import { Observable }     from 'rxjs/Observable';
+// import { Observable }     from 'rxjs/Observable';
 
 // import Quill from '../quill';
 // let _      = Quill.require('lodash');
@@ -37,6 +37,23 @@ export class Authorship {
     // super(quill, options);
     console.info("authorship on");
 var Parchment = Quill.import('parchment');
+let authorClass = new Parchment.Attributor.Class('author', 'author-');
+let authorStyle = new Parchment.Attributor.Style('author', 'author-');
+Quill.register({'formats/authorClass':authorClass});
+
+var Inline=Quill.import('blots/inline');
+
+    Inline.blotName='change';
+    Inline.tagName='CHANGE';
+
+Quill.register({'formats/authorTag':Inline}) ;   
+
+
+
+
+
+
+
 
 
     // console.info(this.quill);
@@ -49,28 +66,36 @@ var Parchment = Quill.import('parchment');
     //to-do 计划改成观察者模式。貌似有点问题，这个函数是挂在quill对象里面的，最好不要动他们的原始逻辑。
     //我还是只关注自己的业务逻辑比较好。收回。
 /*    Observable.fromEvent(this.quill,this.quill.constructor.events.PRE_EVENT).map()*/
-    this.quill.on(this.quill.constructor.events.EDITOR_CHANGE, (eventName, delta, origin) => {
-      console.info(eventName,origin,delta);
-      if (eventName === this.quill.constructor.events.TEXT_CHANGE && true/*origin === 'user'*/) {
+    this.quill.on(this.quill.constructor.events.TEXT_CHANGE, (delta, old_delta/*it is history*/, origin) => {
+      console.info(origin,old_delta,delta);
+      if (/*eventName === this.quill.constructor.events.TEXT_CHANGE && true*/origin === 'user') {
         let authorDelta = new Delta();
         let authorFormat = { author: this.options.authorId };
+        let authorTag={authorTag:true};
 
         //这像个pipline
         for(let op of delta.ops) {
-          if (op.delete != null) { return; }
-          if ((op.insert != null) || ((op.retain != null) && (op.attributes != null))) {
+
+          // if (op.delete != null) { return; }
+          //目前只记录文字更改，这里好像还能记录格式更改，wtf。
+          if ((op.insert != null) || ((op.retain != null)||(op.delete != null) /*&& (op.attributes != null)*/)) {
+
             // Add authorship to insert/format
             if (!op.attributes) { op.attributes = {}; }
             op.attributes.author = this.options.authorId;
             // Apply authorship to our own editor
-            return authorDelta.retain(op.retain || op.insert.length || 1, authorFormat);
+            authorDelta.retain(op.retain || op.insert ||op.delete || 1, authorFormat);
+            authorDelta.retain(authorTag,{bold:true});
+
+
           } else {
-            return authorDelta.retain(op.retain);
+            authorDelta.retain(op.retain);
           }
         }
-        
-        return this.quill.updateContents(authorDelta, Quill.sources.SILENT);
+
+        this.quill.updateContents(authorDelta, Quill.sources.SILENT);
       }
+
     }
     );
     this.addAuthor(this.options.authorId, this.options.color);
