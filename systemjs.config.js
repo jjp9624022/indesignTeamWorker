@@ -25,7 +25,9 @@
     'typescript':                 'https://npmcdn.com/typescript@1.9.0-dev.20160409/lib/typescript.js',
     'quill':                      'node_modules/quill/dist/quill.js',
     'eventemitter':               'node_modules/eventemitter3',
-    'rich-text':                      'node_modules/rich-text',
+    'rich-text':                   'node_modules/rich-text',
+    'deepcopy':                   'node_modules/deepcopy/build/deepcopy.js',
+
     
  };
 
@@ -35,7 +37,8 @@
     'rxjs':                       { defaultExtension: 'js' },
     'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
     'eventemitter':               { main: 'index.js', defaultExtension: 'js' },
-    'rich-text':               { main: 'index.js', defaultExtension: 'js' }, 
+    'rich-text':                  { main: 'index.js', defaultExtension: 'js' }, 
+
  
    // 'quill':                      { main: 'main.js'},     
     

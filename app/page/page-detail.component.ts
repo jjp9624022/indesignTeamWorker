@@ -53,7 +53,7 @@ var toolbarOptions = [
   this.editor = new Quill('#editor', {
   modules: {
     'toolbar':toolbarOptions,
-    'authorship': { authorId: 'galadriel', enabled: true },
+    'authorship': { authorId: 'leweng', enabled: true,color:"#e60000" },
     // 'multi-cursor': true,
     // 'link-tooltip': true
   },

@@ -7,28 +7,24 @@
 // import "quill";//这句太关键，但是有点丑陋，其实就是从这一句我发现了ts的配置诀窍。
 export var Quill = require("quill");
 export var Delta = Quill.import('delta');
+export var Inline=Quill.import('blots/inline');
 
+export var deepcopy = require('deepcopy');
 // import * as Module from ('quill');
 // let Delta  = Quill.require('delta');
 // let Module = Quill.require('module');
 // import Module from '../core/module';
 // import Parchment from 'parchment';
 
-class Module{
-  quill;
-  options;
-  constructor(quill, options = {}) {
-    this.quill = quill;
-    this.options = options;
-  }
-}
-export class Authorship {
+
+
+export class Authorship implements Module {
     quill;
   options;
 
   static DEFAULTS = {
     authorId: null,
-    color: 'transparent',
+    color: '#e60000',
     enabled: true
   };
 
@@ -37,23 +33,31 @@ export class Authorship {
     // super(quill, options);
     console.info("authorship on");
 var Parchment = Quill.import('parchment');
-let authorClass = new Parchment.Attributor.Class('author', 'author-');
-let authorStyle = new Parchment.Attributor.Style('author', 'author-');
+let authorClass = new Parchment.Attributor.Class('author', 'author-', {
+  scope: Parchment.Scope.INLINE
+});
+let authorStyle = new Parchment.Attributor.Style('author', 'background-color', {
+  scope: Parchment.Scope.INLINE
+}/*,{
+  whitelist: ['#e60000', '#000000', '#555555']}*/);
 Quill.register({'formats/authorClass':authorClass});
 
-var Inline=Quill.import('blots/inline');
-
-    Inline.blotName='change';
-    Inline.tagName='CHANGE';
-
-Quill.register({'formats/authorTag':Inline}) ;   
+// Quill.register({'formats/authorStyle':});
 
 
+//Adding Arrray to XArray prototype chain.
+// var Change=Inline;
 
 
+// Change.blotName=deepcopy(Inline.blotName);
+// Change.tagName=deepcopy(Inline.tagName);
 
+// Change.blotName='change';
+// Change.tagName='CHANGE';
+// console.info(Change);
+// Quill.register({'formats/authorTag':Change}); 
 
-
+  
 
 
     // console.info(this.quill);
@@ -70,28 +74,46 @@ Quill.register({'formats/authorTag':Inline}) ;
       console.info(origin,old_delta,delta);
       if (/*eventName === this.quill.constructor.events.TEXT_CHANGE && true*/origin === 'user') {
         let authorDelta = new Delta();
-        let authorFormat = { author: this.options.authorId };
-        let authorTag={authorTag:true};
 
+        let authorTag={authorTag:true};
         //这像个pipline
         for(let op of delta.ops) {
 
-          // if (op.delete != null) { return; }
-          //目前只记录文字更改，这里好像还能记录格式更改，wtf。
-          if ((op.insert != null) || ((op.retain != null)||(op.delete != null) /*&& (op.attributes != null)*/)) {
+          if (op.retain && !op.attributes){
+            authorDelta.retain(op.retain);
+          }else
+          if(op.insert){
 
-            // Add authorship to insert/format
             if (!op.attributes) { op.attributes = {}; }
             op.attributes.author = this.options.authorId;
-            // Apply authorship to our own editor
-            authorDelta.retain(op.retain || op.insert ||op.delete || 1, authorFormat);
-            authorDelta.retain(authorTag,{bold:true});
 
+            authorDelta.insert(op.insert,op.attributes);
+            console.info("insert",op);
+            
 
-          } else {
-            authorDelta.retain(op.retain);
+          }else
+          if(op.retain &&  op.attributes!= null){
+
+            op.attributes.author = this.options.authorId;
+            authorDelta.retain(op.retain,op.attributes);
+
+          }else
+
+          if(op.delete){
+
+            op.attributes.author = this.options.authorId;
+            authorDelta.delete(op.delete);
+            
+
+          }else {
+
+          authorDelta.retain((op.insert != null) || ((op.retain != null)||(op.delete != null)));
+
           }
+
+
         }
+        console.info(authorDelta);
 
         this.quill.updateContents(authorDelta, Quill.sources.SILENT);
       }
