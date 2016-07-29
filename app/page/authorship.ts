@@ -42,14 +42,56 @@ let authorClass = new Parchment.Attributor.Class('author', 'author', {
 let idClass = new Parchment.Attributor.Class('idClass', 'id', {
   scope: Parchment.Scope.BLOCK
 });
-class Frame implements Inline{
-  static blotName;
-  static tagName;
-}
+//这里是全部关于定位的属性：
+let heightStyle = new Parchment.Attributor.Style('heightStyle', 'height',{
+  scope: Parchment.Scope.BLOCK
+});
 
-Frame.blotName ='buttonTag';
-Frame.tagName='myTag';
-Quill.register({'formats/bold':Frame});
+let widthStyle = new Parchment.Attributor.Style('widthStyle', 'width',{
+  scope: Parchment.Scope.BLOCK
+});
+
+let topStyle = new Parchment.Attributor.Style('topStyle', 'top',{
+  scope: Parchment.Scope.BLOCK
+});
+let leftStyle = new Parchment.Attributor.Style('leftStyle', 'left',{
+  scope: Parchment.Scope.BLOCK
+});
+let fontsizeStyle = new Parchment.Attributor.Style('fontsizeStyle', 'font-size',{
+  scope: Parchment.Scope.INLINE
+});
+let positionStyle = new Parchment.Attributor.Style('positionStyle', 'position',{
+  scope: Parchment.Scope.BLOCK
+});
+
+let textoverflow = new Parchment.Attributor.Style('textoverflow', 'text-overflow',{
+  scope: Parchment.Scope.BLOCK
+});
+
+let visableStyle = new Parchment.Attributor.Style('visableStyle', 'opacity',{
+  scope: Parchment.Scope.BLOCK
+});
+
+Quill.register({'formats/heightStyle':heightStyle});
+Quill.register({'formats/widthStyle':widthStyle});
+Quill.register({'formats/topStyle':topStyle});
+Quill.register({'formats/leftStyle':leftStyle});
+Quill.register({'formats/positionStyle':positionStyle});
+Quill.register({'formats/fontsizeStyle':fontsizeStyle});
+Quill.register({'formats/textoverflow':textoverflow});
+Quill.register({'formats/visableStyle':visableStyle});
+
+
+
+
+// class Frame implements Inline{
+//   static blotName;
+//   static tagName;
+// }
+
+// Frame.blotName ='buttonTag';
+// Frame.tagName='myTag';
+// Quill.register({'formats/bold':Frame});
 // Quill.register({'formats/bold':Inline});
 Quill.register({'formats/idClass':idClass});
 Quill.register({'formats/authorClass':authorClass});

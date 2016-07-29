@@ -85,7 +85,23 @@ doEditor(paras:any){
     for (var i =0 ; i < paras.length; i++) {
       console.info(paras[i])
       text.push({insert:""+paras[i].contents});
-      text.push({ insert: '\n', attributes: { align: 'left',idClass:""+paras[i].id } });
+      text.push({ insert: '\n', attributes: { 
+        align: 'left',
+        //设置id
+        idClass:""+paras[i].id,
+        //设置定位属性
+        heightStyle:(paras[i].bounds[3]-paras[i].bounds[1])*3+"px",
+        widthStyle:(paras[i].bounds[2]-paras[i].bounds[0])*3+"px",
+        topStyle:paras[i].bounds[1]*3+"px",
+        leftStyle:paras[i].bounds[0]*3+"px", 
+        positionStyle:"absolute",
+        textoverflow:"ellipsis",
+        fontsizeStyle:"8px",
+        visableStyle:"0.0",
+
+
+      } 
+    });
 
 
     }

@@ -1,0 +1,18 @@
+.ql-editor p{
+	position: absolute;
+    margin: 0px;
+    border:1px;
+
+}
+.ql-editor p.text{
+    	overflow:hidden;
+        text-overflow:ellipsis;
+        font-size: 8px;
+    }
+
+ .ql-editor p.text:hover{
+
+text-overflow:inherit;
+overflow:visible;
+
+ }
