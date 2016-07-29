@@ -26,7 +26,7 @@
     'quill':                      'node_modules/quill/dist/quill.js',
     'eventemitter':               'node_modules/eventemitter3',
     'rich-text':                   'node_modules/rich-text',
-    'deepcopy':                   'node_modules/deepcopy/build/deepcopy.js',
+    'extend':                   'node_modules/extend',
 
     
  };
@@ -37,7 +37,9 @@
     'rxjs':                       { defaultExtension: 'js' },
     'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
     'eventemitter':               { main: 'index.js', defaultExtension: 'js' },
-    'rich-text':                  { main: 'index.js', defaultExtension: 'js' }, 
+    'rich-text':                  { main: 'index.js', defaultExtension: 'js' },
+    'extend':                     { main: 'index.js', defaultExtension: 'js' }, 
+ 
 
  
    // 'quill':                      { main: 'main.js'},     

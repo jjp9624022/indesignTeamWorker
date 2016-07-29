@@ -7,15 +7,18 @@
 // import "quill";//这句太关键，但是有点丑陋，其实就是从这一句我发现了ts的配置诀窍。
 export var Quill = require("quill");
 export var Delta = Quill.import('delta');
+export var Bold = Quill.import('formats/bold');
 export var Inline=Quill.import('blots/inline');
+export var Parchment = Quill.import('parchment');
 
-export var deepcopy = require('deepcopy');
+
+
+// export var deepcopy = require('deepcopy');
 // import * as Module from ('quill');
 // let Delta  = Quill.require('delta');
 // let Module = Quill.require('module');
 // import Module from '../core/module';
 // import Parchment from 'parchment';
-
 
 
 export class Authorship implements Module {
@@ -24,7 +27,7 @@ export class Authorship implements Module {
 
   static DEFAULTS = {
     authorId: null,
-    color: '#e60000',
+    color: 'transparent',
     enabled: true
   };
 
@@ -32,32 +35,36 @@ export class Authorship implements Module {
     //可以不用继承。先试试，因为继承牵涉的太多了
     // super(quill, options);
     console.info("authorship on");
-var Parchment = Quill.import('parchment');
-let authorClass = new Parchment.Attributor.Class('author', 'author-', {
+let authorClass = new Parchment.Attributor.Class('author', 'author', {
   scope: Parchment.Scope.INLINE
 });
-let authorStyle = new Parchment.Attributor.Style('author', 'background-color', {
-  scope: Parchment.Scope.INLINE
-}/*,{
-  whitelist: ['#e60000', '#000000', '#555555']}*/);
+// let authorStyle = new Parchment.Attributor.Style('author', 'background-color');
+let idClass = new Parchment.Attributor.Class('idClass', 'id', {
+  scope: Parchment.Scope.BLOCK
+});
+class Frame implements Inline{
+  static blotName;
+  static tagName;
+}
+
+Frame.blotName ='buttonTag';
+Frame.tagName='myTag';
+Quill.register({'formats/bold':Frame});
+// Quill.register({'formats/bold':Inline});
+Quill.register({'formats/idClass':idClass});
 Quill.register({'formats/authorClass':authorClass});
 
-// Quill.register({'formats/authorStyle':});
-
-
+// Quill.register({'formats/selfId':selfId});
+// Quill.register({'formats/authorStyle':authorStyle});
 //Adding Arrray to XArray prototype chain.
 // var Change=Inline;
-
-
 // Change.blotName=deepcopy(Inline.blotName);
 // Change.tagName=deepcopy(Inline.tagName);
-
 // Change.blotName='change';
 // Change.tagName='CHANGE';
 // console.info(Change);
 // Quill.register({'formats/authorTag':Change}); 
 
-  
 
 
     // console.info(this.quill);
@@ -71,7 +78,7 @@ Quill.register({'formats/authorClass':authorClass});
     //我还是只关注自己的业务逻辑比较好。收回。
 /*    Observable.fromEvent(this.quill,this.quill.constructor.events.PRE_EVENT).map()*/
     this.quill.on(this.quill.constructor.events.TEXT_CHANGE, (delta, old_delta/*it is history*/, origin) => {
-      console.info(origin,old_delta,delta);
+      // console.info(origin,old_delta,delta);
       if (/*eventName === this.quill.constructor.events.TEXT_CHANGE && true*/origin === 'user') {
         let authorDelta = new Delta();
 
@@ -86,6 +93,7 @@ Quill.register({'formats/authorClass':authorClass});
 
             if (!op.attributes) { op.attributes = {}; }
             op.attributes.author = this.options.authorId;
+            op.attributes.angularTag=true;
 
             authorDelta.insert(op.insert,op.attributes);
             console.info("insert",op);
@@ -93,15 +101,19 @@ Quill.register({'formats/authorClass':authorClass});
 
           }else
           if(op.retain &&  op.attributes!= null){
-
+            // op.attributes.authorStyle="gray";
             op.attributes.author = this.options.authorId;
+            op.attributes.angularTag=true;
+
             authorDelta.retain(op.retain,op.attributes);
+            console.info("changeFormat",op);
 
           }else
 
           if(op.delete){
 
-            op.attributes.author = this.options.authorId;
+            // op.attributes.author = this.options.authorId;
+            //需要动大
             authorDelta.delete(op.delete);
             
 

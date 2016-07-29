@@ -8,6 +8,7 @@ import { PageService } from './page.service';
 import {ParaEditorComponent} from '../para/para-editor.component'
 // import "quill";
 export var Quill = require("quill");
+// export var Delta = Quill.import('delta');
 
 //这句太关键，但是有点丑陋，其实就是从这一句我发现了ts的配置诀窍。
 // export var EventEmitter2=require("eventemitter2");
@@ -45,10 +46,23 @@ paras: Para[] = [];
 
 Quill.register({'modules/authorship':Authorship});
 var toolbarOptions = [
-  [{ size: ['small', false, 'large', 'huge'] }],
-  ['bold', 'italic', 'underline'],
-  [{ color: [] }, { background: [] }],    // Snow theme fills in values
-  [{ script: 'sub' }, { script: 'super' }]
+  ['bold', 'italic', 'underline', 'strike','angularTag'],        // toggled buttons
+  ['blockquote', 'code-block'],
+
+  [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+  [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+  [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+  [{ 'direction': 'rtl' }],                         // text direction
+
+  [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+  [{ 'font': [] }],
+  [{ 'align': [] }],
+
+  ['clean']                                         // remove formatting button
 ];
   this.editor = new Quill('#editor', {
   modules: {
@@ -62,22 +76,25 @@ var toolbarOptions = [
 
   
   // this.editor.addModule('toolbar', { container: '#toolbar' });
-  this.editor.on('text-change', delta=>console.info("total",this.editor.getContents()));
+  this.editor.on('editor-change', (delta, old_delta/*it is history*/, origin) => 
+      console.info(origin,old_delta,delta));
 }
 
 doEditor(paras:any){
     let text:any=[];
     for (var i =0 ; i < paras.length; i++) {
+      console.info(paras[i])
       text.push({insert:""+paras[i].contents});
-      text.push({ insert: '\n', attributes: { align: 'left' } });
+      text.push({ insert: '\n', attributes: { align: 'left',idClass:""+paras[i].id } });
 
 
     }
         
 
 let authManager=this.editor.getModule("authorship");
-console.info(authManager);
-authManager.addAuthor('id-5678', 'rgb(255, 255, 0)');
+// console.info(authManager);
+// authManager.addAuthor('id-5678', 'rgb(255, 255, 0)');
+// var myDelta=new Delta(text);
     this.editor.setContents(text);
 /*    
     var module = this.editor.addModule('authorship', {
@@ -102,6 +119,15 @@ module.addAuthor('id-5678', 'rgb(255, 255, 0)'); */
 
 
   }
+
+setAuthorView(){
+let elList=document.querySelectorAll(".author-leweng");
+for (let elIndex in elList)
+    {
+
+elList[elIndex].setAttribute("style", "background-color:blue")
+     }
+}
 ngOnChanges(){
       this.paraService.setBookId(this.pageService.getBookId()).setPageId(this.page.id);
      this.paraService.getParas()

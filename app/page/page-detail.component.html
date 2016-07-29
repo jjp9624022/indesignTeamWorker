@@ -2,6 +2,10 @@
 <div><my-para-editor [contents]="para.contents"></my-para-editor></div>
 </div> -->
 <link href="https://cdn.quilljs.com/1.0.0-beta.9/quill.snow.css" rel="stylesheet">
+<div>
+	
+	<button class="ql-hidden-author" (click)="setAuthorView()">显示/隐藏协作者</button>
+</div>
 <div class="pageContent" [ngStyle]="{'width':page.bounds[2]*3+'px','height':page.bounds[3]*3+'px','background-image': 'url(' + page.pageImg + ')'}">
 <div id="toolbar">
 <!-- <select class="ql-size">

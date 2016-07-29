@@ -7,24 +7,6 @@ declare interface Module {
 
 
 
-
-declare interface InlineStatic{
-blotName;
-tagName;
-compare(self, other);
-formatAt(index, length, name, value);
-allowedChildren:any[];
-order:any[];
-}
-
-
-declare var Inline: InlineStatic;
-
-declare module "Inline" {
-
-    export = Inline;
-}
-
 declare interface QuillStatic{
 	    sources;
 	    import(things:string):any
@@ -34,3 +16,30 @@ declare interface QuillStatic{
 declare module "Module" {
     export = Module;
 }
+
+
+
+// declare interface InlineStatic{
+
+// compare(self, other);
+// allowedChildren:any[];
+// order:any[];
+// blotName;
+// tagName;
+
+
+// formatAt(index, length, name, value);
+// }
+
+
+// declare interface Inline {
+
+// }
+
+
+// declare var Inline:InlineStatic;
+
+// declare module "Inline" {
+
+//     export = Inline;
+// }
