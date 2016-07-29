@@ -8,6 +8,8 @@ import { PageService } from './page.service';
 import {ParaEditorComponent} from '../para/para-editor.component'
 // import "quill";
 export var Quill = require("quill");
+export var Delta = Quill.import('delta');
+
 
 //这句太关键，但是有点丑陋，其实就是从这一句我发现了ts的配置诀窍。
 // export var EventEmitter2=require("eventemitter2");
@@ -53,7 +55,7 @@ var toolbarOptions = [
   this.editor = new Quill('#editor', {
   modules: {
     'toolbar':toolbarOptions,
-    'authorship': { authorId: 'leweng', enabled: true,color:"#e60000" },
+    'authorship': { authorId: 'leweng', enabled: true,color:"gray"},
     // 'multi-cursor': true,
     // 'link-tooltip': true
   },
@@ -62,23 +64,25 @@ var toolbarOptions = [
 
   
   // this.editor.addModule('toolbar', { container: '#toolbar' });
-  this.editor.on('text-change', delta=>console.info("total",this.editor.getContents()));
+  // this.editor.on('text-change', delta=>console.info("total",this.editor.getContents()));
 }
 
 doEditor(paras:any){
     let text:any=[];
     for (var i =0 ; i < paras.length; i++) {
       text.push({insert:""+paras[i].contents});
-      text.push({ insert: '\n', attributes: { align: 'left' } });
+      text.push({ insert: '\n', attributes: { align: 'left' ,idClass: ""+paras[i].id} });
 
 
     }
         
 
-let authManager=this.editor.getModule("authorship");
-console.info(authManager);
-authManager.addAuthor('id-5678', 'rgb(255, 255, 0)');
-    this.editor.setContents(text);
+// let authManager=this.editor.getModule("authorship");
+// console.info(authManager);
+// authManager.addAuthor('id-5678', 'rgb(255, 255, 0)');
+let myDerta=new Delta(text);
+    // this.editor.setContents(text);
+    this.editor.updateContents(myDerta, Quill.sources.SILENT);
 /*    
     var module = this.editor.addModule('authorship', {
   authorId: 'id-1234',
