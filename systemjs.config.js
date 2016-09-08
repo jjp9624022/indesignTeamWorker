@@ -13,16 +13,16 @@
   //map tells the System loader where to look for things
   var  map = {
     'app':                        'app',
-   // '@angular':                   'https://npmcdn.com/@angular', // sufficient if we didn't pin the version
+   // '@angular':                   'https://unpkg.com/@angular', // sufficient if we didn't pin the version
 
-    '@angular':                   'https://npmcdn.com/@angular', // sufficient if we didn't pin the version
-    '@angular/router':            'https://npmcdn.com/@angular/router' + routerVer,
-    '@angular/forms':             'https://npmcdn.com/@angular/forms' + formsVer,
-    '@angular/router-deprecated': 'https://npmcdn.com/@angular/router-deprecated' + routerDeprecatedVer,
-    'angular2-in-memory-web-api': 'https://npmcdn.com/angular2-in-memory-web-api', // get latest
-    'rxjs':                       'https://npmcdn.com/rxjs@5.0.0-beta.6',
-    'ts':                         'https://npmcdn.com/plugin-typescript@4.0.10/lib/plugin.js',
-    'typescript':                 'https://npmcdn.com/typescript@1.9.0-dev.20160409/lib/typescript.js',
+    '@angular':                   'https://unpkg.com/@angular', // sufficient if we didn't pin the version
+    '@angular/router':            'https://unpkg.com/@angular/router' + routerVer,
+    '@angular/forms':             'https://unpkg.com/@angular/forms' + formsVer,
+    '@angular/router-deprecated': 'https://unpkg.com/@angular/router-deprecated' + routerDeprecatedVer,
+    'angular2-in-memory-web-api': 'https://unpkg.com/angular2-in-memory-web-api', // get latest
+    'rxjs':                       'https://unpkg.com/rxjs@5.0.0-beta.6',
+    'ts':                         'https://unpkg.com/plugin-typescript@4.0.10/lib/plugin.js',
+    'typescript':                 'https://unpkg.com/typescript@1.9.0-dev.20160409/lib/typescript.js',
     'quill':                      'node_modules/quill/dist/quill.js',
     'eventemitter':               'node_modules/eventemitter3',
     'rich-text':                   'node_modules/rich-text',
@@ -61,7 +61,7 @@
   // Add map entries for each angular package
   // only because we're pinning the version with `ngVer`.
   ngPackageNames.forEach(function(pkgName) {
-    map['@angular/'+pkgName] = 'https://npmcdn.com/@angular/' + pkgName + ngVer;
+    map['@angular/'+pkgName] = 'https://unpkg.com/@angular/' + pkgName + ngVer;
   });
 
   // Add package entries for angular packages
